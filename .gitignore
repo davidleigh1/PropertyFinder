@@ -24,7 +24,10 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
+build/*
+# exception to include the latest debug apk
+!build/outputs/apk/debug/
+
 .idea
 .gradle
 local.properties

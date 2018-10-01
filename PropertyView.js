@@ -2,13 +2,16 @@
 
 import React, { Component } from 'react'
 import {
-    StyleSheet,
-    Image,
-    View,
-    TouchableHighlight,
-    FlatList,
-    Text,
-    } from 'react-native';
+  StyleSheet,
+  Image,
+  View,
+  TouchableHighlight,
+  FlatList,
+  Button,
+  Text,
+  Linking,
+  Icon,
+} from 'react-native';
 
 // import Iframe from "react-iframe";
 
@@ -66,9 +69,10 @@ export default class PropertyView extends Component<Props> {
     render() { 
         console.log("Prop:", this.state.incomingParams.navigation.state.params.selectedProperty);
 
-        const map_url = "https://maps.google.com/maps?q=51.52616%2C-0.097272&t=&z=17&ie=UTF8&iwloc=&output=embed";
-
         const thisProperty = this.state.incomingParams.navigation.state.params.selectedProperty;
+
+        // const map_url = "https://maps.google.com/maps?q=51.52616%2C-0.097272&t=&z=17&ie=UTF8&iwloc=&output=embed";
+        const map_url = "https://maps.google.com/maps?z=19&t=m&q=loc:" + thisProperty.latitude + "+" + thisProperty.longitude;
 
         return ( <View>
             {/* <WebView source={{ uri: "https://www.w3schools.com" }} style={{ height: 300, marginTop: 20 }} /> */}
@@ -92,10 +96,20 @@ export default class PropertyView extends Component<Props> {
                 <Text style={styles.summary}>
                   {thisProperty.keywords}
                 </Text>
-              </View>
+            <Button
+                icon={{
+                    name: 'map',
+                    size: 15,
+                    color: 'white'
+                }}
+                style={styles.mapbutton}
+                title="View Map"
+                onPress={() => { Linking.openURL(map_url); }} 
+            />
             </View>
+        </View>
 
-            <View style={styles.separator} />
+        <View style={styles.separator} />
 
             {/* <Iframe url="{map_url}"
                 width="450px"
@@ -147,8 +161,13 @@ const styles = StyleSheet.create({
   },
   largepic: {
     marginTop: 100,
-    height: 500, 
+    height: 500,
     width: null
+  },
+  mapbutton: {
+    margin: 20,
+    padding: 20,
+    fontSize: 5,
   }
 });
 

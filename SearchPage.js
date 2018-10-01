@@ -8,8 +8,10 @@ import {
     View,
     Button,
     ActivityIndicator,
-    Image,
+    Image
     } from 'react-native';
+
+// import { Icon } from 'react-native-elements'
 
 type Props = {};
 
@@ -120,7 +122,16 @@ export default class SearchPage extends Component<Props> {
               <TextInput underlineColorAndroid={"transparent"} style={styles.searchInput} value={this.state.searchString} onChange={this._onSearchTextChanged} placeholder="Search via name or postcode" />
 
               {/* onPress={() => { }} --button click will return null response*/}
-              <Button onPress={this._onSearchPressed} color="#48BBEC" title="Go" />
+              <Button 
+                onPress={this._onSearchPressed} 
+                color="#48BBEC"
+                icon={{
+                    name:'search',
+                    size:15,
+                    color:'white'
+                }}
+                title="Go"
+                />
             </View>
             <Image source={require("./resources/house.png")} style={styles.image} />
             {spinner}
